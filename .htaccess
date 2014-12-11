@@ -1,0 +1,26 @@
+<IfModule mod_rewrite.c>
+		
+	RewriteEngine on
+	
+	# --------------------------------------------------------------------
+	# APPLICATION - FRONT END
+	# --------------------------------------------------------------------
+
+		#RewriteRule ^(crop|thumb|sprite)/([0-9]+)/([0-9]+)/(.*)$		/imgs/resize.php?trim=$1&width=$2&height=$3&file=$4 [L,QSA]
+
+
+		# ----------------------------------------------------------------
+		# APPLICATION - Help with the "assets" directory at top level
+		# ----------------------------------------------------------------
+
+		RewriteRule ^(imgs|css|js|downloads|cms)/(.*)$	/assets/$1/$2 [L]
+		
+		# ----------------------------------------------------------------
+		# APPLICATION - Pretty URLs (index.php/dir becomes /dir)
+		# ----------------------------------------------------------------
+		RewriteCond $1 !^(index\.php)
+		RewriteCond %{REQUEST_FILENAME} !-f
+		RewriteCond %{REQUEST_FILENAME} !-d
+		RewriteRule ^(.*)$ /index.php?$1 [L]
+
+</IfModule>

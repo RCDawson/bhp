@@ -1,0 +1,141 @@
+/*
+* iRespond V1.0
+* Copyright 2013, Ryan Dawson
+* www.iamryandawson.com
+* Free to use under the MIT license.
+* http://www.opensource.org/licenses/mit-license.php
+* 05/27/2013
+*/
+
+/*  #Mobile First
+================================================== */
+        .container { margin:0 10px; width: auto; }
+        .container .columns, .container .column { margin: 0; }
+        .row { margin-bottom: 20px; }
+
+        .container .one, .container .two, .container .three, .container .four, .container .five,
+		.container .six, .container .seven, .container .eight, .container .nine, .container .ten,
+		.container .eleven, .container .twelve { width:100% }
+
+        .container .offset-by-one,
+        .container .offset-by-two,
+        .container .offset-by-three,
+        .container .offset-by-four,
+        .container .offset-by-five,
+        .container .offset-by-six,
+        .container .offset-by-seven,
+        .container .offset-by-eight,
+        .container .offset-by-nine,
+        .container .offset-by-ten,
+        .container .offset-by-eleven { padding-left: 0; }
+
+/* #Tablet (Portrait)
+================================================== */
+@media only screen and (min-width: 768px) and (max-width: 977px) {
+	.container						{ width: 744px; margin:0 auto; }
+	.container .column,
+	.container .columns				{ float:left; margin-left: 24px }
+
+	.container .one             	{ width: 40px; }
+	.container .two             	{ width: 104px; }
+	.container .three           	{ width: 168px; }
+	.container .four            	{ width: 232px; }
+	.container .five            	{ width: 296px; }
+	.container .six             	{ width: 360px; }
+	.container .seven           	{ width: 424px; }
+	.container .eight           	{ width: 488px; }
+	.container .nine            	{ width: 552px; }
+	.container .ten             	{ width: 616px; }
+	.container .eleven          	{ width: 680px; }
+	.container .twelve          	{ width: 744px; }
+
+	/* Offsets */
+	.container .offset-by-one		{ padding-left: 48px; }
+	.container .offset-by-two		{ padding-left: 96px; }
+	.container .offset-by-three		{ padding-left: 144px; }
+	.container .offset-by-four		{ padding-left: 192px; }
+	.container .offset-by-five		{ padding-left: 240px; }
+	.container .offset-by-six		{ padding-left: 288px; }
+	.container .offset-by-seven		{ padding-left: 336px; }
+	.container .offset-by-eight		{ padding-left: 384px; }
+	.container .offset-by-nine		{ padding-left: 432px; }
+	.container .offset-by-ten		{ padding-left: 480px; }
+	.container .offset-by-eleven	{ padding-left: 528px; }
+
+	.columns:first-child, .column:first-child { margin-left:0 }
+}
+
+/* #Tablet (Landscape) / Desktop
+================================================== */
+
+@media only screen and (min-width: 978px) {
+    .container                      { width: 978px; margin: 0 auto; }
+    .container .column,
+    .container .columns             { float: left; margin-left: 30px; }
+
+    /* Base Grid */
+    .container .one                 { width: 54px;  }
+    .container .two                 { width: 138px; }
+    .container .three               { width: 222px; }
+    .container .four                { width: 306px; }
+    .container .five                { width: 390px; }
+    .container .six                 { width: 474px; }
+    .container .seven               { width: 558px; }
+    .container .eight               { width: 642px; }
+    .container .nine                { width: 726px; }
+    .container .ten                 { width: 810px; }
+    .container .eleven              { width: 894px; }
+    .container .twelve              { width: 978px; }
+
+    /* Offsets */
+    .container .offset-by-one       { padding-left: 84px;  }
+    .container .offset-by-two       { padding-left: 168px; }
+    .container .offset-by-three     { padding-left: 252px; }
+    .container .offset-by-four      { padding-left: 336px; }
+    .container .offset-by-five      { padding-left: 420px; }
+    .container .offset-by-six       { padding-left: 504px; }
+    .container .offset-by-seven     { padding-left: 588px; }
+    .container .offset-by-eight		{ padding-left: 672px; }
+    .container .offset-by-nine		{ padding-left: 756px; }
+    .container .offset-by-ten		{ padding-left: 840px; }
+    .container .offset-by-eleven	{ padding-left: 924px; }
+
+	.columns:first-child, .column:first-child { margin-left:0 }
+}
+
+/* #Clearing
+================================================== */
+    
+.container:after {
+	content: "\0020";
+	clear: both;
+	display: block;
+	height: 0;
+	visibility: hidden;
+}
+.clearfix:before,
+.clearfix:after,
+.row:before,
+.row:after {
+	content: '\0020';
+	display: block;
+	height: 0;
+	overflow: hidden;
+	visibility: hidden;
+	width: 0;
+}
+.row:after,
+.clearfix:after {
+	clear: both;
+}
+.row, .clearfix {
+	zoom: 1;
+}
+.clear {
+	clear: both;
+	display: block;
+	height: 0;
+	overflow: hidden;
+	visibility: hidden;
+	width: 0;
+}

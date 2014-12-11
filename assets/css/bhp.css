@@ -1,0 +1,256 @@
+/*
+* Copyright 2013, Ryan Dawson
+* www.iamryandawson.com
+*/
+
+/* Table of Contents
+==================================================
+    #Reset
+    #Base Styles
+    #Vertical Rhythm
+    #Site Styles
+    #Typography
+    #Page Styles
+    #Media Queries
+    #Font-Face */
+
+/* #Reset (Inspired by E. Meyers)
+================================================== */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline; }
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+    display: block; }
+ol, ul {
+    list-style: none; }
+blockquote, q {
+    quotes: none; }
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none; }
+table {
+    border-collapse: collapse;
+    border-spacing: 0; }
+
+hr {
+    border: solid #ddd;
+    border-width: 1px 0 0;
+    clear: both;
+    height: 0;
+    margin:2.5em 0;
+}
+
+/* #Base Styles
+================================================== */
+html {
+    font: 62.5% "LeagueGothicRegular";
+    background:#1a1a1a url('/imgs/bhp/bgdk.jpg');
+}
+body {
+    font:1.2em/1.6667 Arial, Helvetica, sans-serif;
+/*    background: url("/imgs/bhp/thebg.jpg") repeat scroll 0 0 #F5F6E9; */
+    background:#ffffff url("/imgs/bhp/bg-white.jpg") repeat center 0;
+    color:#555;
+    -webkit-font-smoothing: antialiased; /* Fix for webkit rendering */
+    -webkit-text-size-adjust: 100%;
+}
+
+/* #Vertical Rhythm
+================================================== */
+
+h1 {
+    font-size: 2.667em;
+    line-height:1.25;
+    margin:0 0 0.625em;
+}
+
+h2 {
+    font-size: 2em;
+    line-height: 1.667;
+    margin:0 0 0.834em;
+}
+
+h3 {
+    font-size: 1.5em;
+    line-height: 1.112;
+    margin:0 0 1.112em;
+}
+
+h4 {
+    font-size: 1.334em;
+    line-height: 1.249;
+    margin:1.249em 0;
+}
+
+h5 {
+    font-size: 0.917em;
+    line-height: 1.812;
+    margin:0 0 1.812em;
+}
+h6 {
+    font-size: 0.833em;
+    line-height: 2;
+    margin:0 0 2em;
+}
+
+/* #Typography
+================================================== */
+h1, h2, h3, h4, h5, h6 { color:#3a3a3a; font-weight:400; font-family:Georgia, Times, "Times New Roman", serif; }
+
+p, ul, ol {
+    font-size: 1.167em;
+    line-height: 1.429;
+    margin:0 0 1.429em;
+}
+/*	Blockquotes  */
+blockquote, blockquote p { font-style: italic }
+blockquote { border-left: 1px solid #ddd }
+blockquote cite { display: block }
+blockquote cite:before { content: "\2014 \0020" }
+
+em { font-style: italic; }
+strong { font-weight: bold; }
+small { font-size: 80%; }
+
+/* #Site Styles
+================================================== */
+body { margin-bottom:3.3334em; }
+a:hover, a:active { color: #800B19 }
+#header { margin-bottom:0 }
+#logo { border-top:3px solid #3a3a3a; }
+#logo img { display:block; max-width: 100%; margin:1.6667em auto 0; }
+#menu-toggle {
+    background: url("/imgs/bhp/menu-btn-red2.png") no-repeat 98% center;
+    height: 44px;
+    margin: 0;
+    padding: 5px 0;
+}
+#menu-toggle:hover { cursor:pointer }
+#menu-toggle span { display:none }
+#nav { background-color:#c41127; border-bottom:2px solid #1A1A1A; border-top: 1px solid #1A1A1A; text-align:center; display:block }
+#nav ul li { border-top:1px solid #1a1a1a; line-height:3.333; width:auto }
+#nav ul li a { text-align:left; text-indent:2ex }
+#nav ul { margin:0 auto; overflow:hidden; display:none } /* max-width:matches logo img */
+#nav li a { border-left:1px solid #800B19; display:block; color:#ffffff; text-align:center; text-decoration:none; white-space:nowrap; }
+#nav li a:hover, #nav li a.current { background-color: #800B19 }
+#nav li:first-child a { border:none }
+#main { padding-top:2.5em }
+/*#main, #footer { border-top:1px solid #DCDCDC }*/
+.bird-border { background:url('../imgs/bhp/bird-border-top.png') no-repeat center top; height:40px }
+#footer {
+	background:#1a1a1a url('/imgs/bhp/bgdk.jpg');
+	padding-top:2.5em;
+	margin-top:2.5em;
+}
+#footer, #footer h5 {
+	color:#999;
+}
+#footer h5 { display:inline-block }
+
+/* #Social Network Ticks
+================================================== */
+#socials { display:inline; }
+#socials a { display:inline; line-height:2; font-family:georgia, times, serif; color:#777; text-decoration:none; }
+#socials a:hover { color:#999; }
+#socials li span {
+	background:#1a1a1a url('/imgs/bhp/logos/socials.png');
+	display:block;
+	float:left;
+	height:24px;
+	margin-right:1ex;
+	width:24px;
+}
+#socials li { float:left; margin-left:2ex }
+#socials li:first-child { margin-left:0 }
+/*#socials #tw a { background-position: 0 0; }*/
+#socials #fb span { background-position: 0 220px; }
+
+/* #Upcoming overrides
+================================================== */
+
+#upcoming blockquote {
+	border:none;
+	background-color:#f6f6f6;
+	font-family:Georgia, "Times New Roman", Times, Serif;
+	padding:3ex;
+	margin-bottom:1.66667em;
+}
+
+#upcoming blockquote p {
+	line-height:1.71428;
+	margin:1.66667em 0 0;
+}
+
+#upcoming blockquote p:first-child {
+	margin:0;
+}
+
+#upcoming h3 {
+    background-color: #800B19;
+    border-radius: 4px 4px 4px 4px;
+    color: white !important;
+    display: inline-block;
+    font-family: helvetica,arial,sans-serif !important;
+    font-size: 1em;
+    line-height: 1.6667;
+    margin: 0 0 1.6667em 0;
+    padding: 1ex 2ex 0.5ex;
+}
+
+#upcoming h4 em {
+    display: inline-block;
+    font-size: 1.334em;
+    line-height: 1.249;
+    margin-right:1ex;
+}
+
+#upcoming img.publication, .right, img.right {
+    float: right;
+}
+
+img.right { margin: 0 0 0 20px }
+
+#upcoming .eight img {
+    max-height: 200px;
+    padding: 1ex;
+    border: 1px solid #cccccc;
+    margin: 0 1.66667em 1.66667em;
+}
+#about-us img.right, img.right {
+    max-width:50%;
+}
+
+.six.columns ol {
+    list-style-type: decimal;
+    padding-left:2ex;
+}
+
+.six.columns ol li {
+    margin-bottom:1.66667em;
+}
+
+.video { width:100%; height:315px }
+
+/* #Media Queries
+================================================== */
+/* Tablet Portrait */
+@media only screen and (min-width: 768px) {
+	#nav #menu-toggle { display:none !important }
+	#nav ul { display: block; max-width:650px; }
+	#nav ul li { border-top:none; float:left; width:16% }
+	#nav ul li a { text-indent:0; text-align:center }
+}
+/* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
+@media only screen and (max-width: 479px) {
+	#nav li a { font-size: 0.85714em; line-height:3.5 }
+    #about-us img.right, .author img {
+        margin:0 0 .8em .8em;
+        max-width:50% !important;
+    }
+    .video { height: 250px }
+}

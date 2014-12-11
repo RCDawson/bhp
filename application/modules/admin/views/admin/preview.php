@@ -1,0 +1,1 @@
+<iframe src="<?php echo base_url(); ?>home" width="100%" height="2000"></iframe>

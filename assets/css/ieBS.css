@@ -1,0 +1,7 @@
+ul#preview { text-align:right; }
+ul#preview li {
+	display:inline;
+	margin:0 0 2em 2em;
+	text-align:left;
+	zoom:1;
+}
