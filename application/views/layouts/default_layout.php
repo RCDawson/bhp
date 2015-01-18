@@ -56,6 +56,12 @@
                 <ul class="container">
                     <?php
                         if(!empty($main_nav)) {
+                            $media = new stdClass();
+                            $media->url = "media";
+                            $media->link_text = "Media";
+                            $test[] = $media;
+                            array_splice($main_nav,2,0,$test);
+//                            unset($main_nav[5]);
                             foreach($main_nav as $link) {
                                 if($link->url=='home') { $link->url=''; }
                                 echo '<li><a href="/'.$link->url.'" title="'.$link->link_text.'" '.selected($link->url,1).'>'.$link->link_text.'</a></li>';
@@ -77,14 +83,14 @@
         </div>
 	        <div id="footer" class="row">
 	        	<div class="container">
-	    	    	<div class="eight columns">
+	    	    	<div class="six columns">
 	    	    		<ul id="socials">
-	    	    			<li id="fb"><h5><a href="http://www.facebook.com/BleedingHeartPublications"><span></span>Follow Us</a></h5></li>
+                            <li id="fb"><h5><a href="http://www.facebook.com/BleedingHeartPublications" target="_blank"><span></span></a></h5></li>
+                            <li id="tw"><h5><a href="https://twitter.com/bh_publications" target="_blank"><span></span></a></h5></li>
 	    	    		</ul>
 	    	    	</div>
-	    	    	<div class="four columns">
-    	    		    <h5 class="right">&copy; <?php date_default_timezone_set("America/Chicago");
-                		echo date("Y"); ?> BH Publications PTE Ltd. All Rights Reserved.</h5>
+	    	    	<div class="six columns">
+    	    		    <h5 class="right">&copy; 2013 - <?php echo date("Y"); ?> BH Publications PTE Ltd. All Rights Reserved.</h5>
         	    	</div>
 				</div>
         	</div>

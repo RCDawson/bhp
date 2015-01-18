@@ -1,4 +1,5 @@
 <?php
+
 /* @	Documentation
  * 	Admin/Edit View must contain 1 object: $page
  * 	May contain 1 array of objects: $kids
@@ -6,34 +7,29 @@
  * 	Debug::dump($kids);exit;
  */
 if (!empty($page)) {
-    //Debug::dump($page);
-    /* @ Documentation
-     *  Popluate the form on initial render with user-to-be-edited's information.
-     *  Use form_validation handler after form processing begins.
-     */
-    (!empty($page->parent_url)) ? $parent_url = $page->parent_url.'/': $parent_url='';
-    if ($page->url == $this->uri->segment(3)) {
+    $parent_url = (!empty($page->parent_url)) ? $page->parent_url . '/' : '';
+    if ($page->url == $this->uri->segment(4)) {
         if ($this->input->post()) {
             $title = set_value('title');
             $url = set_value('url');
-            $active = set_radio('active', '1', true);
+            //$role1 = set_radio('role','1');
+            //$role0 = set_radio('role','0');
         } else {
             $title = $page->title;
             $url = $page->url;
-            $active = ($page->active) ? 'value="1" checked' : 'value="0"';
+            //($edit_user->role=="1") ? $role1='checked' : $role1='checked';
+            //($edit_user->role=="0") ? $role0='checked' : $role0='';
         }
-//Debug::dump($page,true);
-        ?>
+?>
         <div class="cms-70w left">
             <ul class="cms-form-errors">
                 <?php echo validation_errors(); ?>
             </ul>
-            <form method="post" action="<?php echo current_url(); ?>">
+            <form method="post">
                 <p>
                     <label>Page Title *</label>
-                    <input type="text" name="title" value="<?php echo $title; ?>" maxlength="50">
-                    <input type="text" name="url">
-                    <input type="checkbox" name="active" value="1" <?php echo $active ?>>
+<!--                    <input type="hidden" name="id" value="--><?php //echo $page->id; ?><!--">-->
+                    <input type="text" name="title" value="<?php echo $page->title; ?>" maxlength="50" required>
                 </p>
                 <?php if ($page->url != 'home') { ?>
                 <p>
@@ -57,8 +53,26 @@ if (!empty($page)) {
             </form>
         </div>
         <div class="cms-30w right pods">
+            <label>Publish</label>
+            <form method="post" action="<?php echo current_url(); ?>">
+                <p>Publish: <span id="publish_date"><?php echo unix_to_human(strtotime($page->published)); ?></span> <a onclick="changeDate();
+                return false;" href="javascript:void(0);">Schedule</a></p>
+                <input type="hidden" name="published" value="<?php /* echo date2select($content->publish); */ echo '2013-10-40'; ?>">
+                <input type="hidden" name="id" value="<?php //echo $content->id;  ?>" />
+                <input type="submit" value="Set Date">
+            </form>
             <div class="pods">
-                <p>Child Pages</p>
+                <label>Extras</label>
+                <ul>
+                    <li>Side bar: 
+                        <select>
+                            <option><?php echo(!empty($page->sidebar_content->friendly)) ? $page->sidebar_content->friendly : 'None'; ?></option>
+                        </select>
+                    </li>
+                </ul>
+            </div>
+            <div class="pods">
+                <label>Child Pages</label>
             <?php } if (!empty($kids)) { ?>
                 <ul class="manage sub">
 
@@ -66,7 +80,7 @@ if (!empty($page)) {
                     foreach ($kids as $kid) { ?>
                         <li>
 
-                            <a href="/admin/edit/<?php echo $url . '/' . $kid->url; ?>" title="Edit this page"><b><?php echo $kid->title ?></b></a>
+                            <a href="/admin/edit/<?php echo $kid->url; ?>" title="Edit this page"><b><?php echo $kid->title ?></b></a>
 
                             <dl class="cms-controls">
                                 <dd><a href="/admin/edit/<?php echo $kid->url; ?>" class="edit" title="Edit this page"><span>Edit</span></a></dd>
@@ -76,8 +90,11 @@ if (!empty($page)) {
                         <?php $i++;
                     } ?>
                 </ul>
-                <button type="button" onclick="window.location='/admin/create/page';">Add <?php echo $title; ?></button>
-            <?php } ?>
+            <?php } else {
+                if ($page->url != 'home') { ?>
+                    <p class="info warning"><span class="icon">&nbsp;</span> No sub pages have been created.</p>
+                <?php }
+            } ?>
 <?php } else { ?>
             <p class="info warning"><span class="icon">&nbsp;</span> Something went wrong. <a href="/admin/" title="Good idea">Return to the dashboard?</a></p>
 <?php } ?>

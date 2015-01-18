@@ -60,6 +60,21 @@ class Admin extends MY_Controller {
      * Admin CRUD
      */
 
+    public function editChildPage($url,$childId)
+    {
+        $data = new stdClass();
+        $this->load->helper('date');
+        $this->set_redirect(current_url());
+//    	$view->settings = $this->get_settings();
+        // Try to pull some data
+        $data->page = $this->admin_model->editChildPage($childId);
+        $this->admin_model->main_form('editChild', $url, $childId);
+        $this->template
+            ->inject_partial('js','/js/ckeditor/ckeditor.js')
+            ->set_breadcrumb($this->uri->segment(3),'./')
+            ->title($data->page->title)->build('/admin/editChild',$data);
+    }
+
     public function edit($url = null) {
     	$this->load->helper('date');
         $this->set_redirect(current_url());
@@ -96,7 +111,7 @@ class Admin extends MY_Controller {
             $this->template->title('Edit Sidebars')->build('/admin/edit',$data);
         } else {
             $this->admin_model->main_form('edit', $url);
-            $this->template->title('Edit Page')->build('/admin/edit',$data);
+            $this->template->title($data->page->title)->build('/admin/edit',$data);
         }
     }
 
@@ -108,9 +123,12 @@ class Admin extends MY_Controller {
     public function create($_type = null) {
         if($_type=='sidebar' || $_type=='page') {
             $this->admin_model->create_content($_type);
-            $this->template->title('Create '.ucwords($_type))->build('/admin/create_content');
+            $this->template
+                ->title('Create '.ucwords($_type))
+                ->inject_partial('js','/js/ckeditor/ckeditor.js')
+                ->build('/admin/create');
         } else {
-            show_404();
+            show_error('Looking for "sidebar" or "page" at the moment...');
         }
     }
 
@@ -120,12 +138,15 @@ class Admin extends MY_Controller {
     }
 
     public function delete($url) {
+        $data = new stdClass();
     	$data->content = $this->admin_model->delete_view($url);
     	if($this->input->post())
     	{
+            Debug::dump($_POST);
     		$this->admin_model->delete_by_url($url);
     		$this->template->_message('Content has been deleted.', 'success',$this->get_redirect());
     	}
+        Debug::dump($data);
 		$this->template->title('Delete')->build('/admin/delete',$data);
     }
 

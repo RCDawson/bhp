@@ -15,9 +15,10 @@ class Admin_model extends MY_Model {
     /**
      *  Admin CRUD
      */
-    public function main_form($form_type, $url = null) {
+    public function main_form($form_type, $url = null, $childId = null) {
         if ($this->input->post('url')) {
             $_POST['url'] = url_title($this->input->post('url'), 'dash', TRUE);
+            if(empty($_POST['active'])) $_POST['active'] = 0;
         }
         $this->load->helper(array('form', 'url'));
         $this->load->library('form_validation');
@@ -27,6 +28,7 @@ class Admin_model extends MY_Model {
             $this->form_validation->set_rules('title', 'Title', 'trim|required');
         }
         $this->form_validation->set_rules('url', 'URL', 'trim|required|callback_be_unique');
+        $this->form_validation->set_rules('active', 1);
         $this->form_validation->set_error_delimiters('<li>', '</li>');
 
         if ($this->form_validation->run() == FALSE) {
@@ -34,6 +36,9 @@ class Admin_model extends MY_Model {
         } else {
             if ($form_type == 'new') {
 //                $this->new_user();
+            }
+            if ($form_type == 'editChild') {
+                $this->update_child_page($url,$childId);
             }
             if ($form_type == 'edit' || $form_type == 'edit_sidebar') {
                 $this->update_page($url);
@@ -57,6 +62,17 @@ class Admin_model extends MY_Model {
         return true;
     }
 
+    public function create($_type)
+    {
+        if(empty($_POST['url'])) $_POST['url'] = url_title($_POST['title'],'dash',TRUE);
+//        Debug::dump($_POST);die;
+        $now = date("Y-m-s H:i:s");
+        $_POST['published'] = $now;
+        $this->db->insert('mc_content', $this->input->post());
+        $this->template->_message('New ' . $_type . ' created.','success',current_url());
+
+    }
+
     public function create_content($_type, $url = null) {
         $this->load->helper(array('form', 'url'));
         $this->load->library('form_validation');
@@ -73,6 +89,9 @@ class Admin_model extends MY_Model {
         if ($this->form_validation->run() == FALSE) {
             return false;
         } else {
+            if ($_type == 'page') {
+                $this->create($_type);
+            }
             if ($_type == 'new') {
 //                $this->new_user();
             }
@@ -96,6 +115,15 @@ class Admin_model extends MY_Model {
         } else {
             $this->db->insert('options', $this->input->post());
         }
+    }
+
+    public function editChildPage($childId) {
+        $query = $this->db
+            ->where('url', $childId)
+            ->get('mc_content');
+        $result = $query->row();
+        if($result && $result->parent_id == null) { show_error('Can not find page'); }
+        return $result;
     }
 
     public function edit_pages($url = NULL) {
@@ -128,25 +156,34 @@ class Admin_model extends MY_Model {
     }
 
     public function update_page($url) {
-/*
-        $this->db->set('meta_value', $this->input->post('url'))
-                ->where('meta_value', $this->input->post('orig_url'))
-                ->where('meta_key', 'sidebar')
-                ->update('contentmeta');
-*/
+        /*
+                $this->db->set('meta_value', $this->input->post('url'))
+                        ->where('meta_value', $this->input->post('orig_url'))
+                        ->where('meta_key', 'sidebar')
+                        ->update('contentmeta');
+        */
         unset($_POST['orig_url']);
-		$this->db->where('url', $url)->update('mc_content', $this->input->post());
+        $this->db->where('url', $url)->update('mc_content', $this->input->post());
         header("Location:" . base_url() . 'admin/edit/' . $this->input->post('url'));
         $this->template->_message('Update Successful', 'success');
     }
 
+    public function update_child_page($url,$childId) {
+        unset($_POST['orig_url']);
+//        Debug::dump($childId);die;
+//        Debug::dump($this->input->post('url'));
+        $this->db->where('url', $childId)->update('mc_content', $this->input->post());
+        header("Location:" . base_url() . 'admin/edit/' . $url . '/' . $this->input->post('url'));
+        $this->template->_message('Update Successful', 'success');
+    }
+
     public function delete_view($url) {
-        $query = $this->db->select('url,title')->where('url', $url)->get('mc_content');
+        $query = $this->db->select('id,url,title')->where('url', $url)->get('mc_content');
         return $query->row();
     }
 
     public function delete_by_url($url) {
-//        $this->db->where('url',$url)->delete('mc_content');
+        $this->db->where('url',$url)->delete('mc_content');
     }
 
     // End CRUD ---------------------------------------------------------/

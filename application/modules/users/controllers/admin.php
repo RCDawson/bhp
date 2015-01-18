@@ -22,6 +22,7 @@ class Admin extends MY_Controller {
      */
     public function index()
     {
+        $data = new stdClass();
         $data->rows = $this->users_model->users();
 
         foreach($data->rows as $k=>$a) {

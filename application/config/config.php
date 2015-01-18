@@ -18,8 +18,8 @@ APPPATH.'cms/' => '../cms/'
 | path to your installation.
 |
 */
-$config['base_url'] = 'http://www.bleedingheartpublications.com/';
-$config['base_url'] = 'http://bhp.local/';
+$config['base_url'] = '';
+//$config['base_url'] = 'http://bhp.local/';
 
 /*
 |--------------------------------------------------------------------------

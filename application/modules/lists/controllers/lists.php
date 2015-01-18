@@ -1,52 +1,27 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Frontend extends MY_Controller {
+class Lists extends MY_Controller {
+
+    public $content = null;
 
     public function __construct() {
         parent::__construct();
         $this->load->helper('base', 'text');
-        $this->load->model('frontend_model');
-
-		// ci benchmarking //
-		$sections = array(
-			'uri_string' => false,
-			'memory_usage' => false,
-			'http_headers' => false
-			);
-		$this->output->set_profiler_sections($sections);
-        $this->output->enable_profiler(false);
-        // end benchmarking
-	        
+        $this->load->model('lists_model');
+        $this->content = new stdClass();
     }
 
-    public function brandon()
+    public function index()
     {
-        $data = new stdClass();
-        $data->main_nav = $this->frontend_model->get_contentmeta('main_nav');
-        $data->site_name = $this->config->item('site_name');
-        $this->template->title('Brandon Christopher')->build('brandon-christopher',$data);
+        $this->content->main_nav = $this->lists_model->get_contentmeta('main_nav');
+        $this->content->payload = $this->lists_model->index('media');
+        $this->content->site_name = $this->config->item('site_name');
+        $this->template->title('Media')->build('index',$this->content);
     }
 
-    public function aida()
-    {
+    public function indexx($url = NULL, $query_str = NULL) {
+        die(__METHOD__);
         $data = new stdClass();
-        $data->main_nav = $this->frontend_model->get_contentmeta('main_nav');
-        $data->site_name = $this->config->item('site_name');
-        $this->template->title('Aida Zilelian')->build('aida-zilelian',$data);
-    }
-
-    public function index($url = NULL, $query_str = NULL) {
-        // 'home' is the url stored in the db, but don't let anyone know that
-        if ($url == 'home')
-            show_404();
-
-        // Handle first url segment
-        if (empty($url)) {
-            $url = 'home';
-        }
-
-        $data = new stdClass();
-        $data->page = $this->frontend_model->index($url, $query_str);
         $data->page->partials = $this->frontend_model->get_partials_by_id($data->page->id);
         if(!empty($data->page->partials)) {
         	foreach($data->page->partials as $key=>$partial) {

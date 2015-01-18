@@ -19,7 +19,7 @@ if (!empty($page)) {
         </form>
 <?php } else { ?>
         <h3><em>Your message has been sent.</em></h3>
-        <h4>Thank you for your interest in Bleeding Heart Publishing.</h4>
+        <h4>Thank you for your interest in Bleeding Heart Publications.</h4>
 <?php } ?>
 <!--<script type="text/javascript" src="/js/ckeditor-full/ckeditor.js"></script>-->
 <?php } ?>

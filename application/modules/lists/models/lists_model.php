@@ -1,8 +1,32 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Frontend_model extends MY_Model {
+class Lists_model extends MY_Model {
 
-    public function index($url=NULL, $segment2=NULL) {
+    public function index($type,$all=false)
+    {
+        $id=null;
+        $query = $this->db->where('url', $this->uri->segment(1))
+            ->limit(1)
+            ->get('mc_content');
+        if($query->num_rows() > 0) {
+            $id = $query->row()->id;
+        }
+        if($id) {
+            $query = $this->db->where('parent_id', $id)
+                ->order_by('id', 'desc')
+                ->order_by('sort')
+                ->get('mc_content');
+            if ($query->num_rows() > 0) {
+                $results = $query->result_array();
+                //            rsort($results);
+                return $results;
+            } else {
+                return array();
+            }
+        }
+    }
+
+    public function indexX($url=NULL, $segment2=NULL) {
         if(!empty($url)) {
             // Try to get the page
             $query = $this->db->where('url', $url)->where('parent_id',null)->get('mc_content');

@@ -60,12 +60,14 @@ $route['404_override'] = '';
 
 $route['default_controller'] = 'frontend';
 $route['aida-zilelian'] = 'frontend/aida';
+$route['media'] = 'lists/index';
 $route['brandon-christopher'] = 'frontend/brandon';
 $route['index'] = 'frontend';
 $route['([a-zA-Z_-]+)'] = 'frontend/index/$1';
 $route['transfusion'] = 'transfusion';
 
 $route['admin/(login|logout|options)'] = 'admin/$1';
+$route['admin/edit/(:any)/(:any)'] = 'admin/editChildPage/$1/$2';
 $route['admin/(edit|delete|create)/(:any)'] = 'admin/$1/$2';
 $route['admin/([a-zA-Z_-]+)/(:any)'] = '$1/admin/$2';
 $route['admin/([a-zA-Z_-]+)'] = '$1/admin/index';

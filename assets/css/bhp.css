@@ -121,6 +121,8 @@ small { font-size: 80%; }
 ================================================== */
 body { margin-bottom:3.3334em; }
 a:hover, a:active { color: #800B19 }
+a:hover, a:active { color: #cc0033; text-decoration: underline }
+h3 a, h3 a:visited, h4 a, h4 a:visited { color: #333333 }
 #header { margin-bottom:0 }
 #logo { border-top:3px solid #3a3a3a; }
 #logo img { display:block; max-width: 100%; margin:1.6667em auto 0; }
@@ -150,7 +152,7 @@ a:hover, a:active { color: #800B19 }
 #footer, #footer h5 {
 	color:#999;
 }
-#footer h5 { display:inline-block }
+#footer h5 { display:inline-block; font-size:1em; line-height: 1.66667; margin:0 0 1.66667em }
 
 /* #Social Network Ticks
 ================================================== */
@@ -158,22 +160,22 @@ a:hover, a:active { color: #800B19 }
 #socials a { display:inline; line-height:2; font-family:georgia, times, serif; color:#777; text-decoration:none; }
 #socials a:hover { color:#999; }
 #socials li span {
-	background:#1a1a1a url('/imgs/bhp/logos/socials.png');
+	background:#1a1a1a url('/imgs/bhp/logos/socials.png') 0 101px;
 	display:block;
 	float:left;
-	height:24px;
+	height:40px;
 	margin-right:1ex;
-	width:24px;
+	width:40px;
 }
 #socials li { float:left; margin-left:2ex }
 #socials li:first-child { margin-left:0 }
 /*#socials #tw a { background-position: 0 0; }*/
-#socials #fb span { background-position: 0 220px; }
+#socials #fb span { background-position: 0 56px; }
 
 /* #Upcoming overrides
 ================================================== */
 
-#upcoming blockquote {
+#upcoming blockquote, #media blockquote {
 	border:none;
 	background-color:#f6f6f6;
 	font-family:Georgia, "Times New Roman", Times, Serif;
@@ -181,12 +183,12 @@ a:hover, a:active { color: #800B19 }
 	margin-bottom:1.66667em;
 }
 
-#upcoming blockquote p {
+#upcoming blockquote p, #media blockquote p {
 	line-height:1.71428;
 	margin:1.66667em 0 0;
 }
 
-#upcoming blockquote p:first-child {
+#upcoming blockquote p:first-child, #media blockquote p:first-child {
 	margin:0;
 }
 
@@ -241,8 +243,10 @@ img.right { margin: 0 0 0 20px }
 /* Tablet Portrait */
 @media only screen and (min-width: 768px) {
 	#nav #menu-toggle { display:none !important }
-	#nav ul { display: block; max-width:650px; }
-	#nav ul li { border-top:none; float:left; width:16% }
+	/*#nav ul { display: block; max-width:650px; }*/
+	#nav ul { display: block; max-width:768px; }
+	/*#nav ul li { border-top:none; float:left; width:16% }*/
+	#nav ul li { border-top:none; float:left; width:14.2857% }
 	#nav ul li a { text-indent:0; text-align:center }
 }
 /* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */

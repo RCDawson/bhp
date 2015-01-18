@@ -235,7 +235,7 @@ ul.checklist li:hover { background-color:#F7E581;color:#333}
 /*
 ** Bread crumbs
 */
-.breadcrumbs { font: 0.91667em/0.91667 Helvetica, Arial, sans-serf; }
+.breadcrumbs { font: 0.91667em/0.91667 Helvetica, Arial, sans-serf; text-transform: capitalize; }
 .breadcrumbs b, .breadcrumbs b a { color:#999; }
 
 /*.toggle { overflow: hidden; position:relative; }*/

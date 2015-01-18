@@ -11,6 +11,8 @@
             eventually put on paper. It was inescapable and I grew to respect the reality of that. And it moved me to
             give it the honor it deserved.</p>
         <hr>
+        <iframe class="video" width="560" height="315" src="//www.youtube.com/embed/WFgx7xa5JdM" frameborder="0" allowfullscreen></iframe>
+        <hr>
         <p><img alt="Aida Zilelian - Bookstore" src="/imgs/authors/Aida-Zilelian-Bookstore.jpg" style="width:100%; max-width:642px"></p>
         <hr>
         <h2>Still Want More?</h2>

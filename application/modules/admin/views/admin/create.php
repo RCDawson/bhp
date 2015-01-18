@@ -5,61 +5,66 @@
  * 	Debug::dump($page);exit;
  * 	Debug::dump($kids);exit;
  */
-if (!empty($page)) {
-    //Debug::dump($page);
-    /* @ Documentation
-     *  Popluate the form on initial render with user-to-be-edited's information.
-     *  Use form_validation handler after form processing begins.
-     */
-    (!empty($page->parent_url)) ? $parent_url = $page->parent_url.'/': $parent_url='';
-    if ($page->url == $this->uri->segment(3)) {
-        if ($this->input->post()) {
-            $title = set_value('title');
-            $url = set_value('url');
-            $active = set_radio('active', '1', true);
-        } else {
-            $title = $page->title;
-            $url = $page->url;
-            $active = ($page->active) ? 'value="1" checked' : 'value="0"';
-        }
-//Debug::dump($page,true);
-        ?>
+//if (!empty($page)) {
+//    //Debug::dump($page);
+//    /* @ Documentation
+//     *  Popluate the form on initial render with user-to-be-edited's information.
+//     *  Use form_validation handler after form processing begins.
+//     */
+//    (!empty($page->parent_url)) ? $parent_url = $page->parent_url.'/': $parent_url='';
+//    if ($page->url == $this->uri->segment(3)) {
+//        if ($this->input->post()) {
+//            $title = set_value('title');
+//            $url = set_value('url');
+//            //$role1 = set_radio('role','1');
+//            //$role0 = set_radio('role','0');
+//        } else {
+//            $title = $page->title;
+//            $url = $page->url;
+//            //($edit_user->role=="1") ? $role1='checked' : $role1='checked';
+//            //($edit_user->role=="0") ? $role0='checked' : $role0='';
+//        }
+////Debug::dump($page,true);
+//        ?>
         <div class="cms-70w left">
             <ul class="cms-form-errors">
                 <?php echo validation_errors(); ?>
             </ul>
             <form method="post" action="<?php echo current_url(); ?>">
-                <p>
+                <p style="overflow: hidden">
                     <label>Page Title *</label>
-                    <input type="text" name="title" value="<?php echo $title; ?>" maxlength="50">
-                    <input type="text" name="url">
-                    <input type="checkbox" name="active" value="1" <?php echo $active ?>>
+                    <input type="text" name="title" maxlength="50" style="width:45%;float:left">
+                    <span style="width:45%;float:right"><label>Parent</label>
+                    <select name="parent_id">
+                        <option></option>
+                        <option value="5">Authors</option>
+                        <option value="33">Media</option>
+                    </select></span>
                 </p>
-                <?php if ($page->url != 'home') { ?>
-                <p>
-                    <b>Permalink:</b> <?php echo base_url().$parent_url; ?><input type="text" id="permalink" name="url" style="width:auto;margin:0 1ex" class="editable" value="<?php echo $page->url; ?>">
-                    <button type="button" onClick="window.open('<?php echo base_url().$parent_url.$page->url; ?>','_blank');return false;" title="View page in new window">View Page</button>
-                </p>
-                <?php } else { ?>
-                <p><b>Permalink:</b> <?php echo base_url(); ?></p>
-                <input type="hidden" name="url" value="<?php echo $url; ?>">
-                <?php } ?>
+                <!--                --><?php //if ($page->url != 'home') { ?>
+<!--                --><?php //} else { ?>
+<!--                <p><b>Permalink:</b> --><?php //echo base_url(); ?><!--</p>-->
+<!--                <input type="hidden" name="url" value="--><?php //echo $url; ?><!--">-->
+<!--                --><?php //} ?>
                 <p>
                     <label for="heading">Headline (optional). Leave blank, if you want to use your page title as a headline.</label>
-                    <input type="text" id="heading" name="heading" value="<?php echo $page->heading; ?>" maxlength="200">
+                    <input type="text" id="heading" name="heading" maxlength="200">
                 </p>
-                <textarea name="content" class="ckeditor"><?php echo $page->content; ?></textarea>
+                <textarea name="content" class="ckeditor"></textarea>
                 <label>Excerpt</label>
-                <textarea name="excerpt" cols="6" rows="5" class="ckeditor"><?php echo $page->excerpt; ?></textarea>
+                <textarea name="excerpt" cols="6" rows="5" class="ckeditor"></textarea>
+                <input type="hidden" name="page_type" value="<?php echo $this->uri->segment(3); ?>">
+                <input type="hidden" name="sort" value="1">
+                <input type="hidden" name="active" value="1">
+                <input type="hidden" name="parent" value="1">
                 <input type="submit" value="Update">
-                <a href="/admin" class="cancel">cancel</a>
-                <input type="hidden" name="orig_url" value="<?php echo $page->url; ?>">
+                <a href="<?php current_url(); ?>" class="cancel">cancel</a>
             </form>
         </div>
         <div class="cms-30w right pods">
             <div class="pods">
                 <p>Child Pages</p>
-            <?php } if (!empty($kids)) { ?>
+            <?php /*}*/ if (!empty($kids)) { ?>
                 <ul class="manage sub">
 
                     <?php $i = 0;
@@ -76,9 +81,8 @@ if (!empty($page)) {
                         <?php $i++;
                     } ?>
                 </ul>
-                <button type="button" onclick="window.location='/admin/create/page';">Add <?php echo $title; ?></button>
-            <?php } ?>
-<?php } else { ?>
+                <button type="button">Add <?php echo $title; ?></button>
+            <?php } else { ?>
             <p class="info warning"><span class="icon">&nbsp;</span> Something went wrong. <a href="/admin/" title="Good idea">Return to the dashboard?</a></p>
 <?php } ?>
     </div>
