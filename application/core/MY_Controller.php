@@ -35,9 +35,8 @@ class MY_Controller extends MX_Controller {
 		 */
         $this->load->helper('cms_nav');
         $this->template
-        		->set_theme('cms')
                 ->set_breadcrumb('Dashboard', '/admin')
-                ->set_layout('cms_layout');
+                ->set_layout('cms/cms_layout');
 
         if ($this->uri->segment(2) != 'login' && Auth::has_id() === FALSE) {
             $this->set_redirect(base_url() . $this->uri->uri_string);
